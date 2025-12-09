@@ -1,49 +1,53 @@
-**BMO - AI Terminal Companion**
+# **BMO - AI Terminal Companion**
+**Projeto:** Assistente virtual via linha de comando (CLI) focado em respostas concisas e humanizadas. Status: Funcional / MVP
 
-**Projeto:** Assistente virtual via CLI (Interface de Linha de Comando) focado em respostas concisas e humanizadas. Status: Funcional / MVP
+## **Sobre o Projeto (Impacto e Metodologia)**
+Desenvolvi uma interface conversacional organizada, com o objetivo de reduzir a sobrecarga de leitura e humanizar a experiência, usando o poder do **LangChain** e **Python** para orquestrar a inteligência.
 
-**Sobre o Projeto**
+Criei uma arquitetura focada na experiência do usuário, trabalhando a engenharia de prompt para transformar dados brutos em diálogos empáticos e eficientes.
 
-Desenvolvi um agente conversacional integrado ao terminal para fornecer assistencia rapida e organizada, eliminando a complexidade visual de interfaces graficas. A solucao utiliza Python e LangChain para orquestrar o fluxo de conversacao, atingindo uma experiencia de usuario focada e responsiva atraves da integracao com a API do Google Gemini.
+## **Decisões Técnicas e Arquitetura**
+### **Stack Tecnológica**
+Linguagem: Python 3.x.
 
-O diferencial deste projeto e a implementacao de uma persona (BMO) instruida via System Prompt para manter interacoes concisas, objetivas e amigaveis, priorizando frases curtas para otimizar a leitura e a eficiencia da comunicação.
+Orquestração: LangChain.
 
-**Tecnologias e Decisoes Arquiteturais**
+IA Model: Google Gemini Flash.
 
-Por que Google Gemini?
-A escolha do modelo Google Gemini (familia Flash) foi baseada em dois pilares estrategicos:
+Segurança: Gerenciamento seguro de chaves com ```python-dotenv```.
 
-Acessibilidade e Custo-Eficiencia: A API do Gemini oferece um Free Tier robusto, permitindo o desenvolvimento de aplicacoes reais e testes de integracao sem barreiras financeiras iniciais, ideal para escalabilidade de projetos pessoais.
+## **Decisões Estratégicas**
+### **1. Escolha do Modelo: Google Gemini Flash**
+Eu escolhi o Gemini Flash porque ele oferece a velocidade que o terminal precisa e o custo zero (Free Tier). A resposta rápida é crucial, e o Gemini me permitiu entregar isso sem custos.
 
-Equilibrio de Performance: O modelo Flash foi selecionado por sua arquitetura otimizada para tarefas de alta frequencia e baixa complexidade. Embora nenhuma requisicao via API seja instantanea, este modelo oferece uma baixa latencia competitiva, garantindo que a interacao no terminal seja agil o suficiente para manter a fluidez da conversa.
+### **2. Calibragem da Temperature (0.7)**
+Eu ajustei a temperature para 0.7 porque queria um bot que fosse criativo e natural, mas que não inventasse informações. Este valor é ideal para manter a personalidade lúdica e empática do **BMO**, garantindo que ele haja de forma espontânea, mas siga as regras.
 
-**Stack Tecnologica:**
+Engenharia de Persona (Design do BMO)
+Para controlar o comportamento da IA, eu desenhei o System Prompt (a instrução inicial) como um guia de atuação:
 
-1. Linguagem: Python 3.x
+Humanização: Eu instruí o bot a ser um companheiro útil e adorável, simplificando o complexo para o usuário.
 
-2. Orquestracao de IA: LangChain (Core & Google GenAI)
+Restrição de Saída: Eu implementei regras rigorosas de concisão, como limitar a resposta a no máximo duas frases, para otimizar a leitura na tela.
 
-3. Gerenciamento de Ambiente: Python-dotenv
+## **Funcionalidades**
+Personalidade Coordenada: O bot sustenta a persona BMO de forma consistente e amigável.
 
-4. Interface: CLI (Standard Output)
+Memória (Contexto): O sistema guarda o histórico da sessão, permitindo que a conversa faça sentido do começo ao fim.
 
-**Funcionalidades**
+Estrutura Modular: O código é bem dividido em funções (como criarChatbot, responder), seguindo princípios de organização.
 
-Persistencia de Contexto: O bot gerencia o historico da sessao ativa (Memory), permitindo conversas coerentes.
+Estabilidade: Eu incluí tratamento de erros para garantir que o programa não pare de funcionar em caso de falhas na conexão com a IA.
 
-Engenharia de Prompt (Persona BMO): System Prompt calibrado para emular uma personalidade atenciosa e organizada, com instrucoes explicitas para respostas curtas, evitando textos desnecessariamente longos.
+## **Como Executar**
 
-Resiliencia: Implementacao de tratamento de erros (try/except) para capturar falhas na chamada da API ou interrupcoes do usuario, mantendo a aplicacao estavel.
-
-**Como Executar**
-
-Pre-requisitos:
+### **Pre-requisitos:**
 
 1. Python instalado.
 
 2. Uma API Key do Google AI Studio.
 
-**Instalacao**
+**Instalação**
 
 1. Clone o repositorio:
 
@@ -61,7 +65,7 @@ pip install langchain-google-genai langchain-core python-dotenv
 
 ```
 GOOGLE_API_KEY="sua-chave-aqui"
-GEMINI_MODEL="gemini-1.5-flash"
+GEMINI_MODEL="gemini-2.5-flash"
 ```
 
 4. Execute o chatbot:
@@ -75,9 +79,7 @@ python app.py
 ```
 CHAT ATIVO --- DIGITE 'sair' PARA ENCERRAR
 
-Você: Preciso arrumar meus arquivos.
-BMO: Oh, isso parece importante. Vamos Organizar tudo, amigo.
+Você: Quero Organizar meu tempo para um projeto pessoal.
 
-Você: O que voce sugere?
-BMO: Comece separando por categorias. Guardar com carinho e essencial!
+BMO: Yay, que legal, amigo! Missão: organizar seu tempo para seu projeto! Que tal a gente quebrar ele em tarefinhas pequenas? Assim fica mais fácil de consertar! 
 ```
